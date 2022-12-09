@@ -1,0 +1,69 @@
+# Default values for your projects.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+# Add annotations to the pods
+podAnnotations: {}
+
+# do nothing
+image:
+  repository: draft
+  tag: dev
+  pullPolicy: IfNotPresent
+
+# optional list of image pull secrets to use to pull images
+jx:
+  # optional image pull secrets
+  imagePullSecrets: []
+
+  # whether to create a Release CRD when installing charts with Release CRDs included
+  releaseCRD: true
+  
+service:
+  # your service name 
+  name: h52
+  type: ClusterIP
+  # your service port 
+  externalPort: 80
+  # your service targetPort
+  internalPort: 80
+  annotations: {}
+   # add dapr config
+   # dapr.io/enabled: "true"
+   # dapr.io/app-id: "saas-app-platform-management"
+   # dapr.io/app-port: "8081"
+  # Add labels to the service
+  labels: {}
+
+ingress:
+  annotations: {}
+  # defaults to nginx if no other ingress class annotation specified
+  classAnnotation: ""
+  # Add labels to the ingress
+  labels: {}
+
+  # ingress path type
+  pathType: ImplementationSpecific
+
+jxRequirements:
+  ingress:
+    # shared ingress annotations on all services
+    annotations: 
+      nginx.ingress.kubernetes.io/proxy-body-size: "1000m"
+      kubernetes.io/ingress.class: nginx
+    #  kubernetes.io/ingress.class: nginx
+
+    apiVersion: "networking.k8s.io/v1"
+
+    # the domain for hosts
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: -jx.
+    serviceType: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+      secretName: ""
+
+
