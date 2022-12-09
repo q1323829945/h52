@@ -1,0 +1,300 @@
+// 引导页遮罩
+// div#driver-highlighted-element-stage {
+//   border-radius: 15px;
+//   border: 1px solid #409eff;
+// }
+div#driver-highlighted-element-stage,
+div#driver-page-overlay {
+  background: transparent;
+  outline: 5000px solid transparent;
+  // outline: 5000px solid rgba(0, 0, 0, 0.55);
+}
+
+// 引导页 popover
+div#driver-popover-item {
+  // 最外面样式
+  // border-radius: 0;
+  // padding: 0;
+  // width: 260px;
+  // height: 100px;
+  // border-color: #409eff;
+  border: 1.5px solid #409eff;
+
+  div.driver-popover-tip.top {
+    border-color: transparent transparent #409eff;
+  }
+  div.driver-popover-tip.left {
+    border-color: transparent #409eff transparent transparent;
+  }
+  div.driver-popover-title {
+    // margin-top: 10px;
+    font-size: 15px;
+    color: #333333;
+    // color: #fff;
+    // background: sandybrown;
+    // display: none; // 隐藏标题
+  }
+
+  &.only-one-line {
+    // display: flex !important;
+    // background: #409eff;
+    -webkit-animation: up-down-shaking 1.2s infinite;
+    .driver-popover-tip.top {
+      border-color: transparent transparent #409eff;
+    }
+    .driver-popover-description {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #333333;
+    }
+    .driver-popover-footer {
+      margin-top: 20px;
+      .driver-prev-btn {
+        display: none !important;
+      }
+      .driver-next-btn {
+        width: 60px;
+        height: 30px;
+        background: #eef5fe;
+        color: #409eff;
+        text-shadow: none;
+        border-radius: 5px;
+        border: 1px solid #409eff;
+      }
+      .driver-close-btn {
+        display: none !important;
+        width: 60px;
+        height: 30px;
+        background: #f4f4f5;
+        color: #95979b;
+        text-shadow: none;
+        border-radius: 5px;
+        border: 1px solid #e3e4e5;
+      }
+    }
+  }
+
+  &.default-line {
+    -webkit-animation: up-down-shaking 1.2s infinite;
+    // background: #409eff;
+    // display: flex !important;
+    .driver-popover-description {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #333333;
+      // color: #fff;
+      // background: red;
+    }
+    .driver-popover-footer {
+      // background: sandybrown;
+      margin-top: 15px;
+      .driver-prev-btn {
+        width: 60px;
+        height: 30px;
+        background: #eef5fe;
+        color: #409eff;
+        text-shadow: none;
+        border-radius: 5px;
+        border: 1px solid #409eff;
+      }
+      .driver-next-btn {
+        margin-left: 10px;
+        width: 60px;
+        height: 30px;
+        background: #eef5fe;
+        color: #409eff;
+        text-shadow: none;
+        border-radius: 5px;
+        border: 1px solid #409eff;
+      }
+      .driver-close-btn {
+        display: none !important;
+        width: 60px;
+        height: 30px;
+        background: #f4f4f5;
+        color: #95979b;
+        text-shadow: none;
+        border-radius: 5px;
+        border: 1px solid #e3e4e5;
+      }
+    }
+  }
+
+  &.right-bottom-default-line {
+    -webkit-animation: left-right-shaking 1.2s infinite;
+    // background: #409eff;
+    // display: flex !important;
+    .driver-popover-description {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #333333;
+      // background: red;
+    }
+    .driver-popover-footer {
+      // background: sandybrown;
+      margin-top: 15px;
+      .driver-prev-btn {
+        width: 60px;
+        height: 30px;
+        background: #eef5fe;
+        color: #409eff;
+        text-shadow: none;
+        border-radius: 5px;
+        border: 1px solid #409eff;
+      }
+      .driver-next-btn {
+        margin-left: 10px;
+        width: 60px;
+        height: 30px;
+        background: #eef5fe;
+        color: #409eff;
+        text-shadow: none;
+        border-radius: 5px;
+        border: 1px solid #409eff;
+      }
+      .driver-close-btn {
+        display: none !important;
+        width: 60px;
+        height: 30px;
+        background: #f4f4f5;
+        color: #95979b;
+        text-shadow: none;
+        border-radius: 5px;
+        border: 1px solid #e3e4e5;
+      }
+    }
+  }
+
+  // .driver-popover-description {
+  //   // 内容样式设置
+  //   font-size: 14px;
+  //   color: #fff;
+  //   // margin: 50px auto 29px;
+  //   // .step_two {
+  //   //   display: flex;
+  //   //   align-items: center;
+  //   //   justify-content: center;
+  //   //   .step_first {
+  //   //     width: 20px;
+  //   //     height: 20px;
+  //   //     background: #345eef;
+  //   //     border-radius: 50%;
+  //   //     color: #fff;
+  //   //     line-height: 20px;
+  //   //     margin-right: 5px;
+  //   //     text-align: center;
+  //   //   }
+  //   // }
+  // }
+
+  // div.driver-popover-footer {
+  //   // display: flex !important;
+  //   // justify-content: center;
+  //   // margin-bottom: 20px;
+  //   // button.driver-close-btn {
+  //   //   display: none; // 隐藏关闭按钮
+  //   // }
+  //   .driver-btn-group {
+  //     // display: flex;
+  //     // justify-content: center;
+  //     button.driver-prev-btn {
+  //       display: none !important; // 隐藏上一步按钮
+  //     }
+  //     // button.driver-next-btn {
+  //     //   width: 74px;
+  //     //   height: 34px;
+  //     //   background: #345eef;
+  //     //   color: #fff;
+  //     //   text-shadow: none;
+  //     // }
+  //   }
+  // }
+}
+
+.test-decs {
+  background: slateblue;
+}
+
+// 引导弹窗上下浮动动画
+@keyframes up-down-shaking {
+  0% {
+    transform: translateY(-0.2rem);
+  }
+
+  50% {
+    transform: translateY(0.2rem);
+  }
+
+  100% {
+    transform: translateY(-0.2rem);
+  }
+}
+
+// 引导弹窗左右浮动动画
+@keyframes left-right-shaking {
+  0% {
+    transform: translateX(-0.2rem);
+  }
+
+  50% {
+    transform: translateX(0.2rem);
+  }
+
+  100% {
+    transform: translateX(-0.2rem);
+  }
+}
+
+.guide-step1 {
+  margin: -18px 0px 0px 15px;
+  position: fixed;
+  float: left;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+}
+
+.guide-step2 {
+  margin: 25px 0px 0px 45px;
+  position: fixed;
+  float: left;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+}
+
+.guide-step3 {
+  margin: -18px 0px 0px 15px;
+  position: fixed;
+  float: left;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+}
+
+.guide-step4 {
+  margin: -18px 0px 0px 15px;
+  position: fixed;
+  float: left;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+}
+
+.guide-step5 {
+  margin: 30px 0px 0px 45px;
+  position: fixed;
+  float: left;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+}
+
+.workflow-guide-step1 {
+  margin: -18px 0px 0px 15px;
+  position: fixed;
+  float: left;
+  width: 1px;
+  height: 1px;
+  background: slateblue;
+}

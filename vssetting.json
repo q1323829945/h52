@@ -1,0 +1,95 @@
+{
+  // 修改500ms后自动保存
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 500,
+  // 窗口放大
+  "window.zoomLevel": 1,
+  // tab 大小为2个空格
+  "editor.tabSize": 2,
+  // 100 列后换行
+  "editor.wordWrapColumn": 100,
+  // 保存时格式化
+  "editor.formatOnSave": true,
+  // 开启 vscode 文件路径导航
+  "breadcrumbs.enabled": true,
+  // prettier 设置语句末尾不加分号
+  "prettier.semi": false,
+  // prettier 设置强制单引号
+  "prettier.singleQuote": true,
+  // 显示 markdown 中英文切换时产生的特殊字符
+  "editor.renderControlCharacters": true,
+  // 保存校验eslint
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.format.enable": true,
+  //autoFix默认开启，只需输入字符串数组即可
+  "eslint.validate": [
+    "javascript",
+    "vue",
+    "html"
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.disableLanguages": [
+    "vue"
+  ], // 不格式化vue文件，vue文件的格式化单独设置
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  // vetur 的自定义设置
+  "vetur.format.defaultFormatterOptions": {
+    "js-beautify-html": {
+      // #vue组件中html代码格式化样式
+      "wrap_attributes": "force-aligned", //也可以设置为“auto”，效果会不一样
+      "wrap_line_length": 200,
+      "end_with_newline": false,
+      "semi": true,
+      "singleQuote": true,
+      "sortAttributes": true
+    },
+    "prettier": {
+      "singleQuote": true,
+      "semi": false,
+      "trailingComma": "none",
+      "sortAttributes": true
+    }
+  },
+  //函数名称前 加一个空格
+  //"vetur.format.defaultFormatter.js": "vscode-typescript",
+  //"javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "fileheader.configObj": {
+    "annotationStr": {
+      "use": true // 是否使用自定义注释符号
+    },
+    "autoAdd": false, // 自动添加头部注释开启才能自动添加
+    "createHeader": true, // 新建文件自动添加头部注释
+    "wideNum": 13, // 函数注释等宽设置
+    "useWorker": false,
+    "wideSame": true, // 头部注释等宽设置wideSame
+    "autoAlready": true, // 默认开启
+    "CheckFileChange": true, // 单个文件保存时进行diff检查
+    "cursorModeInternal": true, // 函数内生成函数注释
+    "openFunctionParamsCheck": true, // 函数注释自动提取函数的参数
+    "folderBlacklist": [
+      "node_modules",
+      "文件夹或文件名禁止自动添加头部注释"
+      // "webpack.config.js" // 可以禁止某些文件自动添加注释
+    ], // 文件夹或文件名禁止自动添加头部注释
+    "specialOptions": {
+      "Description": "Logs"
+    }
+  },
+  "fileheader.customMade": {
+    "Author": "Topsy", // 编辑人
+    "FilePath": "Do not edit",
+    "Date": "Do not edit", // 编辑时间
+    "LastEditTime": "Do not edit", // 最后编辑时间
+    "LastEditors": "Topsy", // 最后编辑人
+    "Description": "\n" //文件内容描述
+  }
+}

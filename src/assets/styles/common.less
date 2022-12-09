@@ -1,0 +1,185 @@
+// 不带面包屑导航base
+.jsd-base-fixed-view {
+  margin-top: 0px;
+  // top: 90px;
+  left: 210px;
+  right: 20px;
+  position: fixed;
+}
+
+.jsd-base-fixed-top {
+  margin-top: 30px;
+}
+
+// 带面包屑导航的base
+.jsd-base-breadcrumb-view {
+  // margin-top: 40px;
+  // margin-left: -20px;
+  // margin-right: -20px;
+  margin: 40px -20px -20px -20px;
+  left: 210px;
+  right: 0px;
+  background: transparent;
+  // background: red;
+
+  // flex: 1;
+  // display: flex;
+  // flex-direction: column;
+
+  &__content {
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    .layout__box {
+      overflow-y: auto;
+      background-color: transparent;
+      -webkit-overflow-scrolling: touch;
+      &:after {
+        min-height: calc(100% + 1px);
+        content: '';
+      }
+    }
+  }
+}
+
+.jsd-base-breadcrumb-top {
+  margin-top: 0px;
+}
+
+// 编辑
+.jsd-edit-header {
+  background: #fff;
+  position: fixed;
+  margin: -20px 0px 0px -18px;
+  width: 82%;
+  padding: 15px 15px;
+  z-index: 100;
+  // background: transparent;
+  // margin: 0px 0px 0px 20px;
+}
+.jsd-edit-header-top {
+  margin: -10px;
+}
+.jsd-edit-jsd-detail-base {
+  padding-top: 20px;
+}
+.jsd-edit-detail-view {
+  padding-top: 20px;
+}
+
+.jsd-detail-base {
+  background: transparent;
+  // background: red;
+  padding-top: 5px;
+
+  .el-input.el-select {
+    width: 100%;
+  }
+
+  .el-form-item {
+    margin: 0px 50px 16px 0px;
+    min-width: 200px;
+    // background: forestgreen;
+  }
+  .el-form-item .el-form-item__label {
+    float: left;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    min-width: 50px;
+    width: 110px;
+    word-break: break-word;
+    font-size: 13px;
+    height: 34px;
+    justify-content: flex-end;
+    align-items: center;
+    // background: gold;
+  }
+  .el-form-item .el-form-item__content {
+    margin-left: 0 !important;
+    min-width: 185px;
+    flex: 1;
+  }
+
+  .toolbar-section .el-form-item {
+    margin-bottom: 0;
+  }
+}
+
+.jsd-loading-view {
+  margin-top: 0px;
+  height: 400px;
+}
+
+// el-pop
+.el-popconfirm__main {
+  justify-content: center;
+}
+.el-popconfirm__action {
+  // 交换 确定 和 取消 按钮的位置
+  .el-button:nth-child(1) {
+    float: right;
+    width: 60px;
+    height: 32px;
+    background: #999999;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #ffffff;
+  }
+  .el-button:nth-child(2) {
+    float: left;
+    padding: 10px 8px;
+    height: 32px;
+    background: #409eff;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #ffffff;
+  }
+}
+
+// el-dialog
+// 第一层el-dialog
+.custom-dialog-header {
+  background: #fff;
+  min-height: 28px;
+  line-height: 28px;
+  border-bottom: 1px solid #e4e7ed;
+  background: #368ee0;
+  padding: 2px 20px;
+}
+.custom-dialog-header .custom-dialog-title {
+  color: #fff;
+  font-size: 13px;
+  line-height: 24px;
+}
+.el-dialog {
+  display: flex;
+  z-index: 3200;
+  flex-direction: column;
+  margin: 0 !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-height: calc(100% - 200px);
+  max-width: calc(100% - 30px);
+  background: white;
+}
+
+.el-dialog__header {
+  padding: 5px 0px 0px 0px;
+  background: #368ee0;
+
+  .el-dialog__headerbtn {
+    top: 10px;
+  }
+  .el-dialog__close {
+    color: #ffffff;
+  }
+}
+.el-dialog .el-dialog__body {
+  flex: 1;
+  overflow: auto;
+  padding: 10px 20px 20px 20px;
+}

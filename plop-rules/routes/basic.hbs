@@ -1,0 +1,10 @@
+export default {
+  path: '/{{pathCase name}}',
+  name: '{{camelCase name}}',
+  meta: {
+    title: '{{camelCase name}}',
+    keepAlive: true
+  },
+  component: () => import('@/views/{{camelCase name}}/index.vue')
+}
+

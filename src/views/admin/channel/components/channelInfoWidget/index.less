@@ -1,0 +1,50 @@
+.detail-base {
+  background: transparent;
+  padding-top: 5px;
+}
+
+.datasource {
+  margin-top: 20px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+// 通过给父级添加after伪类法，解决最后一排数量不够两端分布的情
+.datasource:after {
+  content: '';
+  width: 370px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  // background: aqua;
+}
+
+.section {
+  padding: 0px 0px 20px 0px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  .el-button {
+    margin-left: 10px;
+  }
+}
+
+.paramsItem {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  // background: blue;
+}
+.detail-base-margin {
+  margin: 20px 0px 20px 0px;
+}
+
+.delete-datasource {
+  margin-top: -16px;
+  margin-right: 20px;
+  // position: relative;
+  // float: left;
+  // top: -7px;
+  // left: 5px;
+}

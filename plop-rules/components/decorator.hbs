@@ -1,0 +1,43 @@
+<template>
+	<div :class='bem()'></div>
+</template>
+
+<script>
+import create from 'utils/create'
+
+export default create({
+	name: '{{ camelCase name }}',
+	components: {},
+	directives: {},
+	filters: {},
+	mixins: [],
+	inheritAttrs: true,
+	props: {
+
+	},
+	data: () => ({
+
+	}),
+	computed: {
+
+	},
+	watch: {
+
+	},
+	created() {
+
+	},
+	mounted() {
+
+	},
+	methods: {
+
+	}
+})
+</script>
+
+<style lang='less'>
+.c-{{dashCase name}} {
+
+}
+</style>

@@ -1,0 +1,116 @@
+.detail-base {
+  background: transparent;
+  padding-top: 5px;
+}
+
+.datasource {
+  margin-top: 20px;
+  padding-top: 10px;
+  margin-bottom: 20px;
+}
+
+.datasource-margin {
+  margin: 0px;
+}
+
+// 通过给父级添加after伪类法，解决最后一排数量不够两端分布的情
+.datasource:after {
+  content: '';
+  width: 370px;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  // background: aqua;
+}
+
+.section {
+  padding: 0px 0px 20px 0px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  // background: seagreen;
+  .el-button {
+    margin-left: 10px;
+  }
+}
+
+.section-padding {
+  padding: 20px 0px 10px 0px;
+  margin: 0px 0px 10px 0px;
+}
+
+.subInfo-view {
+  // padding-top: 10px;
+  padding: 0px 20px 0px 20px;
+  margin: 5px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 0 12px #ceced1;
+  // background: red;
+  // .el-input {
+  //   width: 60px;
+  //   background: royalblue;
+  // }
+}
+
+.subInfo-flex-warp-margin {
+  padding: 20px 20px 0px 20px;
+  margin: 20px 10px 20px 10px;
+}
+
+.flex-warp {
+  flex-wrap: wrap;
+}
+
+.subInfo-margin {
+  margin-top: 20px;
+}
+
+.subInfo-textarea {
+  padding: 20px 20px 0px 20px;
+  /deep/.el-form-item .el-form-item__content {
+    width: 92%;
+  }
+}
+
+.sectionInput-view {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  width: 200px;
+  height: 30px;
+  .el-input {
+    min-width: 60px;
+    max-width: 100px;
+  }
+  .term-label {
+    width: 60px;
+    padding: 0px 10px 0px 20px;
+    font-size: 10px;
+    border: 1px solid #dcdfe6;
+    border-radius: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background: white;
+  }
+}
+
+.file-imgae-view {
+  display: flex;
+  min-width: 249px;
+  max-width: 249px;
+  max-height: 170px;
+  max-height: 170px;
+  justify-content: center;
+  margin: 0px 5px 10px 5px;
+  background: #f5f7fa;
+}
+
+.sectionInput-view-width {
+  width: 270px;
+}
+
+.flex-warp {
+  flex-wrap: wrap;
+}

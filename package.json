@@ -1,0 +1,87 @@
+{
+  "name": "sunline-management-platform",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vue-cli-service serve --mode dev",
+    "test": "vue-cli-service serve --mode test",
+    "uat": "vue-cli-service serve --mode uat",
+    "prod": "vue-cli-service serve --mode prod",
+    "build:dev": "cross-env NODE_ENV=production vue-cli-service build --mode dev",
+    "build:test": "cross-env NODE_ENV=production vue-cli-service build --mode test",
+    "build:uat": "cross-env NODE_ENV=production vue-cli-service build --mode uat",
+    "build": "cross-env NODE_ENV=production vue-cli-service build --mode prod",
+    "build:report": "npm_config_report=true npm run build:prod",
+    "lint": "vue-cli-service lint",
+    "lint:less": "stylelint \"src/**/*.{less,css,vue}\" --fix",
+    "prettier": "prettier --config ./.prettierrc --write \"./**/*.{js,jsx,vue,css,less,md,json}\" ",
+    "create": "plop"
+  },
+  "dependencies": {
+    "axios": "^0.25.0",
+    "core-js": "^3.21.0",
+    "crypto-js": "^3.3.0",
+    "driver.js": "^0.9.8",
+    "echarts": "^5.3.3",
+    "element-ui": "^2.15.6",
+    "jsencrypt": "^3.0.0-rc.1",
+    "path-to-regexp": "^2.4.0",
+    "screenfull": "^5.2.0",
+    "vue": "^2.6.14",
+    "vue-i18n": "8.27.0",
+    "vue-router": "^3.5.2",
+    "vuedraggable": "^2.24.3",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.15",
+    "@vue/cli-plugin-eslint": "^4.5.15",
+    "@vue/cli-service": "^4.5.15",
+    "autoprefixer": "^9.7.6",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "compression-webpack-plugin": "^3.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^6.2.2",
+    "less": "^3.12.2",
+    "less-loader": "^5.0.0",
+    "lint-staged": "^10.4.0",
+    "plop": "^2.7.6",
+    "postcss-adaptive": "^0.5.0",
+    "postcss-import": "^12.0.1",
+    "postcss-pxtorem": "^4.0.1",
+    "postcss-url": "^8.0.0",
+    "prettier-eslint": "^13.0.0",
+    "stylelint": "^13.7.2",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-recess-order": "^2.1.0",
+    "stylelint-order": "^4.1.0",
+    "terser-webpack-plugin": "^4.2.3",
+    "url-loader": "^4.1.1",
+    "vue-template-compiler": "^2.6.11",
+    "webpack-bundle-analyzer": "^3.6.1",
+    "webpack-dev-server": "^4.8.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
