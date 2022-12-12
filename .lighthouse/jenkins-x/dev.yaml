@@ -31,8 +31,7 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            jx-release-version --tag -previous-version=from-tag:v0 -output-format={{.Major}}.{{.Minor}}.{{.Patch}}-beta --debug > VERSION
-            cat VERSION
+            jx-release-version -tag=false -previous-version=from-tag:v0 -output-format={{.Major}}.{{.Minor}}.{{.Patch}}-beta --debug > VERSION
         - name: jx-variables
           resources:
             # override requests for the pod here
@@ -55,6 +54,17 @@ spec:
           resources: {}
         - name: promote-changelog
           resources: {}
+          script: |
+            #!/usr/bin/env sh
+            source .jx/variables.sh
+
+            if [ -d "charts/$REPO_NAME" ]; then
+            jx gitops yset -p version -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
+            jx gitops yset -p appVersion -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
+            jx gitops yset -p 'image.repository' -v $DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME -f ./charts/$REPO_NAME/values.yaml
+            jx gitops yset -p 'image.tag' -v "$VERSION" -f ./charts/$REPO_NAME/values.yaml;
+            else echo no charts; fi
+
         - name: promote-helm-release
           resources: {}
         - name: promote-jx-promote
