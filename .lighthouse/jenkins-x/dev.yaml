@@ -28,6 +28,7 @@ spec:
           name: ""
           resources: {}
         - name: next-version
+          image: ghcr.io/jenkins-x/jx-boot:3.10.15
           resources: {}
           script: |
             #!/usr/bin/env sh
