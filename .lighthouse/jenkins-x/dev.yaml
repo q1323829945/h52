@@ -19,13 +19,13 @@ spec:
           - name: TAG
             value: false
           - name: OUTPUT_FORMAT
-            value: {{.Major}}.{{.Minor}}.{{.Patch}}-beta
+            value: "{{.Major}}.{{.Minor}}.{{.Patch}}-beta"
           - name: PREVIOUS_VERSION
-            value: from-tag:v0
+            value: "from-tag:v0"
           - name: NEXT_VERSION
-            value: auto
+            value: "auto"
           - name: JX_LOG_LEVEL
-            value: debug
+            value: "debug"
           image: uses:q1323829945/my-jx3-pipeline-catalog/tasks/javascript-ui-nginx/release.yaml@versionStream
           name: ""
           resources:
