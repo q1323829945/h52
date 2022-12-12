@@ -15,7 +15,7 @@ spec:
           - name: NPM_CONFIG_USERCONFIG
             value: /tekton/home/npm/.npmrc
           - name: TAG_PREFIX
-            value: ""
+            value: "v"
           image: uses:q1323829945/my-jx3-pipeline-catalog/tasks/javascript-ui-nginx/release.yaml@versionStream
           name: ""
           resources:
