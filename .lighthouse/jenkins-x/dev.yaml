@@ -19,7 +19,7 @@ spec:
           - name: TAG
             value: false
           - name: OUTPUT_FORMAT
-            value: "{{.Major}}.{{.Minor}}.{{.Patch}}-beta"
+            value: {{.Major}}.{{.Minor}}.{{.Patch}}-beta
           - name: PREVIOUS_VERSION
             value: "from-tag:v0"
           - name: NEXT_VERSION
@@ -67,24 +67,14 @@ spec:
           resources: {}
         - name: promote-changelog
           resources: {}
-          script: |
-            #!/usr/bin/env sh
-            source .jx/variables.sh
-            if [ -d "charts/$REPO_NAME" ]; then
-            jx gitops yset -p version -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
-            jx gitops yset -p appVersion -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
-            jx gitops yset -p 'image.repository' -v $DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME -f ./charts/$REPO_NAME/values.yaml
-            jx gitops yset -p 'image.tag' -v "$VERSION" -f ./charts/$REPO_NAME/values.yaml;
-            else echo no charts; fi
-            git add * || true
-            git commit -a -m "chore: release $VERSION" --allow-empty
-            git tag -fa v$VERSION -m "Release version $VERSION"
-            git push --force origin v$VERSION
-            jx changelog create --version v${VERSION}
         - name: promote-helm-release
           resources: {}
         - name: promote-jx-promote
           resources: {}
+          script: |
+            #!/usr/bin/env sh
+            source .jx/variables.sh
+            jx promote -b --env mydev --timeout 1h --no-poll
         volumes:
         - name: npmrc
           secret:
