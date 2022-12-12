@@ -32,12 +32,9 @@ spec:
           script: |
             #!/usr/bin/env sh
             jx-release-version --tag > VERSION
-            ls -lrtha
-            echo "---------------------------------"
             cd /
             cd /usr/bin 
-            ls -lrtha
-            echo "---------------------------------"
+            cat jx-release-version
             
         - name: jx-variables
           resources:
