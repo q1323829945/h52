@@ -31,7 +31,7 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            jx-release-version -tag=false -previous-version=from-tag:v0 -next-version=manual:v0.0.27 -output-format={{.Major}}.{{.Minor}}.{{.Patch}}-beta --debug > VERSION
+            date -d "-0 day $date1" +%s-beta > VERSION
         - name: jx-variables
           resources:
             # override requests for the pod here
