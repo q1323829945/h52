@@ -64,10 +64,6 @@ spec:
           resources: {}
         - name: promote-jx-promote
           resources: {}
-          script: |
-            #!/usr/bin/env sh
-            source .jx/variables.sh
-            jx promote -b --env mydev --timeout 1h --no-poll
         volumes:
         - name: npmrc
           secret:
