@@ -54,6 +54,13 @@ spec:
           resources: {}
         - name: build-container-build
           resources: {}
+          script: |
+            #!/busybox/sh
+            source .jx/variables.sh
+            ls -lrtha
+            docker login -u admin -p admin123 nexus.jx.svc.cluster.local:8082
+            cp /tekton/creds/.docker/config.json /kaniko/.docker/config.json
+            /kaniko/executor $KANIKO_FLAGS --context=/workspace/source --dockerfile=${DOCKERFILE_PATH:-Dockerfile} --destination=$PUSH_CONTAINER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME:$VERSION
         - name: promote-changelog
           resources: {}
           script: |
