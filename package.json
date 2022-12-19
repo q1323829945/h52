@@ -1,7 +1,6 @@
 {
   "name": "sunline-management-platform",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "dev": "vue-cli-service serve --mode dev",
     "test": "vue-cli-service serve --mode test",
