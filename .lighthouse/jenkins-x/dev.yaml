@@ -66,14 +66,15 @@ spec:
             fi
             apt-get update -y && apt-get install curl -y
             
-            params='{"name": "'$NPM_USERNAME'", "password": "'$NPM_PASSWORD'" }'
+            params="{\"name\": \"$NPM_USERNAME\", \"password\": \"$NPM_PASSWORD\" }"
+            echo $params
             loginResult=$(curl -s \
             -H "Accept: application/json" \
             -H "Content-Type:application/json" \
             -X PUT --data "$params" \
             "$registry-/user/org.couchdb.user:$NPM_USERNAME"
             )
-            
+            echo "tokenResult---------------$tokenResult"
             tokenVal=$loginResult
             if [[ $tokenVal == *token* ]]
             then
@@ -83,7 +84,7 @@ spec:
               echo "login fail!"
               echo $loginResult
             fi
-            
+            echo "tokenVal--------$tokenVal"
             authRegistryPath=${registry/https:\/\//}
             npm set registry $registry --userconfig=$NPM_CUSTOMER_CONFIG
             npm set //$authRegistryPath:_authToken=$tokenVal --userconfig=$NPM_CUSTOMER_CONFIG
