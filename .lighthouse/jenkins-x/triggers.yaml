@@ -11,8 +11,8 @@ spec:
   - name: mydev
     context: "mydev"
     source: "dev.yaml"
-    - ^.*-dev$
     branches:
+    - ^.*-dev$
   - name: snapshot
     context: "snapshot"
     source: "snapshot.yaml"

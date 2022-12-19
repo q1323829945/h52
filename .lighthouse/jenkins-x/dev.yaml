@@ -48,6 +48,19 @@ spec:
           resources: {}
         - name: build-ui-build
           resources: {}
+        - name: npm-publish
+          env: 
+          - name: NEXUS_UPLOAD_URL
+            value: http://nexus.jx.svc.cluster.local:80
+          - name: NPM_REPOSITRY_RELEASES
+            value: npm-releases
+          - name: NPM_REPOSITRY_SNAPSHOTS
+            value: npm-snapshots
+          - name: NPM_USERNAME
+            value: admin
+          - name: NPM_PASSWORD
+            value: admin123
+          resources: {}
         - name: check-registry
           resources: {}
         - name: build-container-build
