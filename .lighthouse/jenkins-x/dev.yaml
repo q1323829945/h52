@@ -43,14 +43,14 @@ spec:
           resources: {}
           script: |
             #!/bin/sh
-            source .jx/variables.sh
+            .jx/variables.sh
             repository=""
             if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
               repository=$NPM_REPOSITRY_SNAPSHOTS
             else 
               repository=$NPM_REPOSITRY_RELEASES
             fi
-            source .lighthouse/jenkins-x/publish.sh -r $NEXUS_UPLOAD_URL/repository/$repository -u $NPM_USERNAME -p $NPM_PASSWORD
+            .lighthouse/jenkins-x/publish.sh -r $NEXUS_UPLOAD_URL/repository/$repository -u $NPM_USERNAME -p $NPM_PASSWORD
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
