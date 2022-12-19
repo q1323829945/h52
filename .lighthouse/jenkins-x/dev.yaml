@@ -56,7 +56,6 @@ spec:
           resources: {}
           script: |
             #!/bin/bash
-            
             source .jx/variables.sh
             registry=$NPM_URL
             if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
@@ -64,32 +63,9 @@ spec:
             else 
               registry=$NPM_URL$NPM_REGISTRY_SNAPSHOTS
             fi
+            echo "the registry is $registry"
             apt-get update -y && apt-get install curl -y
-            
-            params="{\"name\": \"$NPM_USERNAME\", \"password\": \"$NPM_PASSWORD\" }"
-            echo $params
-            loginResult=$(curl -s \
-            -H "Accept: application/json" \
-            -H "Content-Type:application/json" \
-            -X PUT --data "$params" \
-            "$registry-/user/org.couchdb.user:$NPM_USERNAME"
-            )
-            echo "tokenResult---------------$tokenResult"
-            tokenVal=$loginResult
-            if [[ $tokenVal == *token* ]]
-            then
-              tokenVal=${tokenVal/\"\}/}
-              echo "login success!!"
-            else
-              echo "login fail!"
-              echo $loginResult
-            fi
-            echo "tokenVal--------$tokenVal"
-            authRegistryPath=${registry/https:\/\//}
-            npm set registry $registry --userconfig=$NPM_CUSTOMER_CONFIG
-            npm set //$authRegistryPath:_authToken=$tokenVal --userconfig=$NPM_CUSTOMER_CONFIG
-            npm publish --registry $registry --userconfig=$NPM_CUSTOMER_CONFIG
-            
+            source .lighthouse/jenkins-x/publish.sh -r $registry -u $NPM_USERNAME -p $NPM_PASSWORD -c $NPM_CUSTOMER_CONFIG
             cat .lighthouse/jenkins-x/.npmrc
   podTemplate: {}
   serviceAccountName: tekton-bot
