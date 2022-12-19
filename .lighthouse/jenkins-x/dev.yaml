@@ -30,7 +30,7 @@ spec:
         - name: npm-publish
           env: 
           - name: NEXUS_UPLOAD_URL
-            value: http://nexus.jx.svc.cluster.local:80
+            value: http://nexus.jx.svc.cluster.local:80/npm-releases/
           - name: NPM_REPOSITRY_RELEASES
             value: npm-releases
           - name: NPM_REPOSITRY_SNAPSHOTS
@@ -43,13 +43,14 @@ spec:
           resources: {}
           script: |
             #!/bin/sh
-            params='{"name": "'$username'", "password": "'$password'" }'
+            
+            params='{"name": "'$NPM_USERNAME'", "password": "'$NPM_PASSWORD'" }'
             # echo $params
             loginResult=$(curl -s \
             -H "Accept: application/json" \
             -H "Content-Type:application/json" \
             -X PUT --data "$params" \
-            "$registry-/user/org.couchdb.user:$username"
+            "$NEXUS_UPLOAD_URL-/user/org.couchdb.user:$username"
             )
             tokenVal=$loginResult
             if [[ $tokenVal == *token* ]]
@@ -61,10 +62,10 @@ spec:
             echo "login fail!"
             echo $loginResult
             fi
-            authRegistryPath=${registry/https:\/\//}
-            npm set registry $registry
+            authRegistryPath=${NEXUS_UPLOAD_URL/https:\/\//}
+            npm set registry $NEXUS_UPLOAD_URL
             npm set //$authRegistryPath:_authToken=$tokenVal
-            npm publish --registry $registry
+            npm publish --registry $NEXUS_UPLOAD_URL
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
