@@ -50,8 +50,6 @@ spec:
             value: admin
           - name: NPM_PASSWORD
             value: admin123
-          - name: NPM_CUSTOMER_CONFIG
-            value: .lighthouse/jenkins-x/.npmrc
           - name: NPM_CONFIG_USERCONFIG
             value: /workspace/source/.lighthouse/jenkins-x/.npmrc
           name: npm-publish
