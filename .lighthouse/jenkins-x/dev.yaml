@@ -47,6 +47,12 @@ spec:
             echo "---------------------"
             cd /tekton
             ls -lrtha
+            echo "---------------------"
+            cd /tekton/home
+            ls -lrtha
+            echo "---------------------"
+            cd /tekton/home/npm
+            ls -lrtha
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
