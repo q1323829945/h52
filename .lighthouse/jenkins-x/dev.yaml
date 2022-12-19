@@ -42,30 +42,17 @@ spec:
           name: npm-publish
           resources: {}
           script: |
-            #!/bin/sh
-            
-            params='{"name": "'$NPM_USERNAME'", "password": "'$NPM_PASSWORD'" }'
-            # echo $params
-            loginResult=$(curl -s \
-            -H "Accept: application/json" \
-            -H "Content-Type:application/json" \
-            -X PUT --data "$params" \
-            "$NEXUS_UPLOAD_URL-/user/org.couchdb.user:$username"
-            )
-            tokenVal=$loginResult
-            if [[ $tokenVal == *token* ]]
-            then
-            tokenVal=${tokenVal#*token\":\"}
-            tokenVal=${tokenVal/\"\}/}
-            echo "login success!!"
-            else
-            echo "login fail!"
-            echo $loginResult
+            #!/bin/bash
+            source .jx/variables.sh
+            repository=""
+            if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
+              repository=$NPM_REPOSITRY_SNAPSHOTS
+            else 
+              repository=$NPM_REPOSITRY_RELEASES
             fi
-            authRegistryPath=${NEXUS_UPLOAD_URL/https:\/\//}
-            npm set registry $NEXUS_UPLOAD_URL
-            npm set //$authRegistryPath:_authToken=$tokenVal
-            npm publish --registry $NEXUS_UPLOAD_URL
+            apt-get update
+            apt-get install curl
+            source .lighthouse/jenkins-x/publish.sh -r $NEXUS_UPLOAD_URL/repository/$repository -u $NPM_USERNAME -p $NPM_PASSWORD
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
