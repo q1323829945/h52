@@ -27,25 +27,67 @@ spec:
         - image: uses:q1323829945/my-jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
           resources: {}
+        - name: next-version
+          resources: {}
+          script: |
+            #!/usr/bin/env sh
+            date +%s-SNAPSHOT > VERSION
+        - name: jx-variables
+          resources:
+            # override requests for the pod here
+            requests:
+              cpu: 400m
+              memory: 512Mi
         - name: npm-publish
           env: 
-          - name: NEXUS_UPLOAD_URL
-            value: http://nexus.jx.svc.cluster.local:80
-          - name: NPM_REPOSITRY_RELEASES
+          - name: NPM_URL
+            value: http://nexus.jx.svc.cluster.local:80/
+          - name: NPM_REGISTRY_RELEASES
             value: npm-releases
-          - name: NPM_REPOSITRY_SNAPSHOTS
+          - name: NPM_REGISTRY_SNAPSHOTS
             value: npm-snapshots
           - name: NPM_USERNAME
             value: admin
           - name: NPM_PASSWORD
             value: admin123
+          - name: NPM_CUSTOMER_CONFIG
+            value: .lighthouse/jenkins-x/.npmrc
           name: npm-publish
           resources: {}
           script: |
             #!/bin/bash
-            npm get registry --userconfig=.lighthouse/jenkins-x/.npmrc
-            npm set registry http://nexus.jx.svc.cluster.local:80/repository/npm-snapshots --userconfig=.lighthouse/jenkins-x/.npmrc
-            npm get registry --userconfig=.lighthouse/jenkins-x/.npmrc
+            
+            source .jx/variables.sh
+            registry=$NPM_URL
+            if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
+              registry=$NPM_URL$NPM_REGISTRY_RELEASES
+            else 
+              registry=$NPM_URL$NPM_REGISTRY_SNAPSHOTS
+            fi
+            apt-get update -y && apt-get install curl -y
+            
+            params='{"name": "'$NPM_USERNAME'", "password": "'$NPM_PASSWORD'" }'
+            loginResult=$(curl -s \
+            -H "Accept: application/json" \
+            -H "Content-Type:application/json" \
+            -X PUT --data "$params" \
+            "$registry-/user/org.couchdb.user:$NPM_USERNAME"
+            )
+            tokenVal=$loginResult
+            if [[ $tokenVal == *token* ]]
+            then
+              tokenVal=${tokenVal/\"\}/}
+              echo "login success!!"
+            else
+              echo "login fail!"
+              echo $loginResult
+            fi
+            authRegistryPath=${registry/https:\/\//}
+            npm set registry $registry --userconfig=$NPM_CUSTOMER_CONFIG
+            npm set //$authRegistryPath:_authToken=$tokenVal --userconfig=$NPM_CUSTOMER_CONFIG
+            #echo $tokenVal
+            #echo "//$authRegistryPath:_authToken=$tokenVal"
+            npm publish --registry $registry --userconfig=$NPM_CUSTOMER_CONFIG
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
