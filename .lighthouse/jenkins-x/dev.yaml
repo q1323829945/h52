@@ -43,6 +43,7 @@ spec:
           resources: {}
           script: |
             #!/bin/bash
+            npm config get userconfig
             npm get registry
             # npm set registry http://nexus.jx.svc.cluster.local:80/repository/npm-snapshots
   podTemplate: {}
