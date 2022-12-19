@@ -59,9 +59,9 @@ spec:
             source .jx/variables.sh
             registry=$NPM_URL
             if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
-              registry=$NPM_URL$NPM_REGISTRY_RELEASES
+              registry=$NPM_URL$NPM_REGISTRY_RELEASES/
             else 
-              registry=$NPM_URL$NPM_REGISTRY_SNAPSHOTS
+              registry=$NPM_URL$NPM_REGISTRY_SNAPSHOTS/
             fi
             echo "the registry is $registry"
             apt-get update -y && apt-get install curl -y
