@@ -52,6 +52,8 @@ spec:
             value: admin123
           - name: NPM_CUSTOMER_CONFIG
             value: .lighthouse/jenkins-x/.npmrc
+          - name: NPM_CONFIG_USERCONFIG
+            value: /workspace/source.lighthouse/jenkins-x/.npmrc
           name: npm-publish
           resources: {}
           script: |
@@ -59,13 +61,13 @@ spec:
             source .jx/variables.sh
             registry=$NPM_URL
             if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
-              registry=$NPM_URL$NPM_REGISTRY_RELEASES/
-            else 
               registry=$NPM_URL$NPM_REGISTRY_SNAPSHOTS/
+            else 
+              registry=$NPM_URL$NPM_REGISTRY_RELEASES/
             fi
             echo "the registry is $registry"
             apt-get update -y && apt-get install curl -y
-            source .lighthouse/jenkins-x/publish.sh -r $registry -u $NPM_USERNAME -p $NPM_PASSWORD -c $NPM_CUSTOMER_CONFIG
+            source .lighthouse/jenkins-x/publish.sh -r $registry -u $NPM_USERNAME -p $NPM_PASSWORD
             cat .lighthouse/jenkins-x/.npmrc
   podTemplate: {}
   serviceAccountName: tekton-bot

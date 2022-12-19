@@ -10,15 +10,13 @@
 # https://registry.npmjs.org/ npm
 # https://packages.aliyun.com/xxxx/npm/npm-registry/ aliyun
 
-while getopts ":r:u:p:c:" opt; do
+while getopts ":r:u:p:" opt; do
         case $opt in
                 r) registry="$OPTARG"
                 ;;
                 u) username="$OPTARG"
                 ;;
                 p) password="$OPTARG"
-                ;;
-                c) config="$OPTARG"
                 ;;
         esac
 done
@@ -46,10 +44,10 @@ else
 fi
 
 authRegistryPath=${registry/https:\/\//}
-npm set registry $registry --userconfig=$config
-npm set //$authRegistryPath:_authToken=$tokenVal --userconfig=$config
+npm set registry $registry 
+npm set //$authRegistryPath:_authToken=$tokenVal 
 
 #echo $tokenVal
 #echo "//$authRegistryPath:_authToken=$tokenVal"
 
-npm publish --registry $registry --userconfig=$config
+npm publish --registry $registry 
