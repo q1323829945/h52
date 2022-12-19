@@ -31,7 +31,7 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            jx-release-version -tag=false -next-version=from-file:package.json -output-format={{.Major}}.{{.Minor}}.{{.Patch}}-{{.Prerelease}} --debug > VERSION
+            jx-release-version -tag=false -next-version=from-file:package.json -output-format={{.String}} --debug > VERSION
             cat VERSION
         - name: jx-variables
           resources:
