@@ -39,20 +39,18 @@ spec:
             value: admin
           - name: NPM_PASSWORD
             value: admin123
+          name: npm-publish
           resources: {}
           script: |
-            #!/bin/sh
-            cd /
-            ls -lrtha
-            echo "---------------------"
-            cd /tekton
-            ls -lrtha
-            echo "---------------------"
-            cd /tekton/home
-            ls -lrtha
-            echo "---------------------"
-            cd /tekton/home/npm
-            ls -lrtha
+            #!/bin/bash
+            source .jx/variables.sh
+            repository=""
+            if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
+              repository=$NPM_REPOSITRY_SNAPSHOTS
+            else 
+              repository=$NPM_REPOSITRY_RELEASES
+            fi
+            source .lighthouse/jenkins-x/publish.sh -r $NEXUS_UPLOAD_URL/repository/$repository -u $NPM_USERNAME -p $NPM_PASSWORD
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s

@@ -1,4 +1,3 @@
-#!/bin/bash
 ###
  # @Author: lizheng2 lizheng2@sunline.cn
  # @Date: 2022-12-19 10:18:13
