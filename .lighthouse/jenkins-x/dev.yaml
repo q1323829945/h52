@@ -28,12 +28,10 @@ spec:
           name: ""
           resources: {}
         - name: next-version
-          image: ghcr.io/jenkins-x/jx-boot:3.10.15
           resources: {}
           script: |
             #!/usr/bin/env sh
-            date +%s-beta > VERSION
-            cat VERSION
+            date +%s-SNAPSHOT > VERSION
         - name: jx-variables
           resources:
             # override requests for the pod here
@@ -50,6 +48,19 @@ spec:
           resources: {}
         - name: build-ui-build
           resources: {}
+        - name: npm-publish
+          env: 
+          - name: NEXUS_UPLOAD_URL
+            value: http://nexus.jx.svc.cluster.local:80
+          - name: NPM_REPOSITRY_RELEASES
+            value: npm-releases
+          - name: NPM_REPOSITRY_SNAPSHOTS
+            value: npm-snapshots
+          - name: NPM_USERNAME
+            value: admin
+          - name: NPM_PASSWORD
+            value: admin123
+          resources: {}
         - name: check-registry
           resources: {}
         - name: build-container-build
@@ -59,20 +70,12 @@ spec:
           script: |
             #!/usr/bin/env sh
             source .jx/variables.sh
-
             if [ -d "charts/$REPO_NAME" ]; then
             jx gitops yset -p version -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
             jx gitops yset -p appVersion -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
             jx gitops yset -p 'image.repository' -v $DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME -f ./charts/$REPO_NAME/values.yaml
             jx gitops yset -p 'image.tag' -v "$VERSION" -f ./charts/$REPO_NAME/values.yaml;
             else echo no charts; fi
-
-            git add * || true
-            git commit -a -m "chore: release $VERSION" --allow-empty
-            git tag -fa $VERSION -m "Release version $VERSION"
-            git push --force origin $VERSION
-
-            jx changelog create --version ${VERSION}
         - name: promote-helm-release
           resources: {}
         - name: promote-jx-promote
