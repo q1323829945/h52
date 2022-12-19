@@ -33,7 +33,7 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            jx-release-version -tag=false -next-version=from-file:package.json -output-format={{.String}} --debug > VERSION
+            jx-release-version -tag=false -next-version=from-file:package.json -output-format={{.String}}  --debug > VERSION
             cat VERSION
         - name: jx-variables
           resources:
@@ -42,20 +42,24 @@ spec:
               cpu: 400m
               memory: 512Mi
         - name: replace-charts
-          resources:
-            # override requests for the pod here
-            requests:
-              cpu: 400m
-              memory: 512Mi
+          env:
+          - name: CHARTS_REPOSITORY_URL
+            value: https://github.com/q1323829945/charts.git
+          resources: {}
+        - name: replace-resources
+          env:
+          - name: CHARTS_REPOSITORY_URL
+            value: https://github.com/q1323829945/resources.git
+          resources: {}
         - name: build-npm-install
           resources: {}
         - name: build-ui-build
           resources: {}
         - name: npm-publish
           env: 
-          - name: NPM_REGISTRY_RELEASES
+          - name: NPM_REPOSITORY_RELEASES
             value: npm-releases
-          - name: NPM_REGISTRY_SNAPSHOTS
+          - name: NPM_REPOSITORY_SNAPSHOTS
             value: npm-snapshots
           - name: NPM_USERNAME
             value: admin
