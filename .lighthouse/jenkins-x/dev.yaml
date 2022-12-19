@@ -42,7 +42,7 @@ spec:
           name: npm-publish
           resources: {}
           script: |
-            #!/bin/bash
+            #!/bin/sh
             source .jx/variables.sh
             repository=""
             if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
