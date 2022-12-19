@@ -43,7 +43,8 @@ spec:
           resources: {}
           script: |
             #!/bin/bash
-            npm set registry http://nexus.jx.svc.cluster.local:80/repository/npm-snapshots
+            npm get registry
+            # npm set registry http://nexus.jx.svc.cluster.local:80/repository/npm-snapshots
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
