@@ -43,14 +43,28 @@ spec:
           resources: {}
           script: |
             #!/bin/sh
-            .jx/variables.sh
-            repository=""
-            if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
-              repository=$NPM_REPOSITRY_SNAPSHOTS
-            else 
-              repository=$NPM_REPOSITRY_RELEASES
+            params='{"name": "'$username'", "password": "'$password'" }'
+            # echo $params
+            loginResult=$(curl -s \
+            -H "Accept: application/json" \
+            -H "Content-Type:application/json" \
+            -X PUT --data "$params" \
+            "$registry-/user/org.couchdb.user:$username"
+            )
+            tokenVal=$loginResult
+            if [[ $tokenVal == *token* ]]
+            then
+            tokenVal=${tokenVal#*token\":\"}
+            tokenVal=${tokenVal/\"\}/}
+            echo "login success!!"
+            else
+            echo "login fail!"
+            echo $loginResult
             fi
-            .lighthouse/jenkins-x/publish.sh -r $NEXUS_UPLOAD_URL/repository/$repository -u $NPM_USERNAME -p $NPM_PASSWORD
+            authRegistryPath=${registry/https:\/\//}
+            npm set registry $registry
+            npm set //$authRegistryPath:_authToken=$tokenVal
+            npm publish --registry $registry
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
