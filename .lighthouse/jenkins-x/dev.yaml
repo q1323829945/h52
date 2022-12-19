@@ -13,7 +13,9 @@ spec:
         stepTemplate:
           env:
           - name: NPM_CONFIG_USERCONFIG
-            value: /tekton/home/npm/.npmrc
+            value: /workspace/source/.lighthouse/jenkins-x/.npmrc
+          - name: NPM_URL
+            value: https://nexus-jx.saas-ops.finline.app/repository/
           image: uses:q1323829945/my-jx3-pipeline-catalog/tasks/javascript-ui-nginx/release.yaml@versionStream
           name: ""
           resources:
@@ -46,23 +48,11 @@ spec:
               cpu: 400m
               memory: 512Mi
         - name: build-npm-install
-          env: 
-          - name: NPM_CONFIG_USERCONFIG
-            value: /workspace/source/.lighthouse/jenkins-x/.npmrc
-          - name: NPM_URL
-            value: https://nexus-jx.saas-ops.finline.app/repository/
           resources: {}
         - name: build-ui-build
-          env: 
-          - name: NPM_CONFIG_USERCONFIG
-            value: /workspace/source/.lighthouse/jenkins-x/.npmrc
-          - name: NPM_URL
-            value: https://nexus-jx.saas-ops.finline.app/repository/
           resources: {}
         - name: npm-publish
           env: 
-          - name: NPM_URL
-            value: https://nexus-jx.saas-ops.finline.app/repository/
           - name: NPM_REGISTRY_RELEASES
             value: npm-releases
           - name: NPM_REGISTRY_SNAPSHOTS
@@ -71,8 +61,6 @@ spec:
             value: admin
           - name: NPM_PASSWORD
             value: admin123
-          - name: NPM_CONFIG_USERCONFIG
-            value: /workspace/source/.lighthouse/jenkins-x/.npmrc
           resources: {}
         - name: check-registry
           resources: {}
