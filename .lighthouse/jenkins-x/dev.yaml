@@ -73,6 +73,7 @@ spec:
             -X PUT --data "$params" \
             "$registry-/user/org.couchdb.user:$NPM_USERNAME"
             )
+            
             tokenVal=$loginResult
             if [[ $tokenVal == *token* ]]
             then
@@ -82,12 +83,13 @@ spec:
               echo "login fail!"
               echo $loginResult
             fi
+            
             authRegistryPath=${registry/https:\/\//}
             npm set registry $registry --userconfig=$NPM_CUSTOMER_CONFIG
             npm set //$authRegistryPath:_authToken=$tokenVal --userconfig=$NPM_CUSTOMER_CONFIG
-            #echo $tokenVal
-            #echo "//$authRegistryPath:_authToken=$tokenVal"
             npm publish --registry $registry --userconfig=$NPM_CUSTOMER_CONFIG
+            
+            cat .lighthouse/jenkins-x/.npmrc
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
