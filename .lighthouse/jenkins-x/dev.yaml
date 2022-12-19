@@ -27,10 +27,21 @@ spec:
         - image: uses:q1323829945/my-jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
           resources: {}
+        - name: next-version
+          resources: {}
+          script: |
+            #!/usr/bin/env sh
+            date +%s-SNAPSHOT > VERSION
+        - name: jx-variables
+          resources:
+            # override requests for the pod here
+            requests:
+              cpu: 400m
+              memory: 512Mi
         - name: npm-publish
           env: 
           - name: NEXUS_UPLOAD_URL
-            value: http://nexus.jx.svc.cluster.local:80/npm-releases/
+            value: http://nexus.jx.svc.cluster.local:80/
           - name: NPM_REPOSITRY_RELEASES
             value: npm-releases
           - name: NPM_REPOSITRY_SNAPSHOTS
