@@ -27,17 +27,6 @@ spec:
         - image: uses:q1323829945/my-jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
           resources: {}
-        - name: next-version
-          resources: {}
-          script: |
-            #!/usr/bin/env sh
-            date +%s-SNAPSHOT > VERSION
-        - name: jx-variables
-          resources:
-            # override requests for the pod here
-            requests:
-              cpu: 400m
-              memory: 512Mi
         - name: npm-publish
           env: 
           - name: NEXUS_UPLOAD_URL
@@ -54,15 +43,7 @@ spec:
           resources: {}
           script: |
             #!/bin/bash
-            source .jx/variables.sh
-            repository=""
-            if [[ "$VERSION" =~ ^.*-SNAPSHOT$ ]]; then 
-              repository=$NPM_REPOSITRY_SNAPSHOTS
-            else 
-              repository=$NPM_REPOSITRY_RELEASES
-            fi
-            apt-get update -y && apt-get install curl -y
-            source .lighthouse/jenkins-x/publish.sh -r $NEXUS_UPLOAD_URL/repository/$repository -u $NPM_USERNAME -p $NPM_PASSWORD
+            npm set registry http://nexus.jx.svc.cluster.local:80/repository/npm-snapshots
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
