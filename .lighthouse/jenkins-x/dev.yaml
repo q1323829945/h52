@@ -43,9 +43,9 @@ spec:
           resources: {}
           script: |
             #!/bin/bash
-            npm get registry
+            npm get registry --userconfig=.lighthouse/jenkins-x/.npmrc
             npm set registry http://nexus.jx.svc.cluster.local:80/repository/npm-snapshots --userconfig=.lighthouse/jenkins-x/.npmrc
-            npm get registry
+            npm get registry --userconfig=.lighthouse/jenkins-x/.npmrc
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
