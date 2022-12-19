@@ -38,16 +38,6 @@ spec:
             requests:
               cpu: 400m
               memory: 512Mi
-        - name: replace-charts
-          resources:
-            # override requests for the pod here
-            requests:
-              cpu: 400m
-              memory: 512Mi
-        - name: build-npm-install
-          resources: {}
-        - name: build-ui-build
-          resources: {}
         - name: npm-publish
           env: 
           - name: NEXUS_UPLOAD_URL
@@ -61,34 +51,12 @@ spec:
           - name: NPM_PASSWORD
             value: admin123
           resources: {}
-        - name: check-registry
-          resources: {}
-        - name: build-container-build
-          resources: {}
-        - name: promote-changelog
-          resources: {}
           script: |
-            #!/usr/bin/env sh
-            source .jx/variables.sh
-            if [ -d "charts/$REPO_NAME" ]; then
-            jx gitops yset -p version -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
-            jx gitops yset -p appVersion -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
-            jx gitops yset -p 'image.repository' -v $DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME -f ./charts/$REPO_NAME/values.yaml
-            jx gitops yset -p 'image.tag' -v "$VERSION" -f ./charts/$REPO_NAME/values.yaml;
-            else echo no charts; fi
-        - name: promote-helm-release
-          resources: {}
-        - name: promote-jx-promote
-          resources: {}
-          script: |
-            #!/usr/bin/env sh
-            source .jx/variables.sh
-            jx promote -b --env mydev --timeout 1h --no-poll
-        volumes:
-        - name: npmrc
-          secret:
-            optional: true
-            secretName: npmrc
+            #!/bin/bash
+            cd /
+            cat /tekton/home/npm/.npmrc
+            cd /tekton/home/npm
+            ls -lrtha
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
