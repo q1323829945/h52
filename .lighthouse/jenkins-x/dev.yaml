@@ -41,7 +41,7 @@ spec:
         - name: npm-publish
           env: 
           - name: NPM_URL
-            value: http://nexus.jx.svc.cluster.local:80/repository/
+            value: https://nexus-jx.saas-ops.finline.app/repository/
           - name: NPM_REGISTRY_RELEASES
             value: npm-releases
           - name: NPM_REGISTRY_SNAPSHOTS
@@ -53,7 +53,7 @@ spec:
           - name: NPM_CUSTOMER_CONFIG
             value: .lighthouse/jenkins-x/.npmrc
           - name: NPM_CONFIG_USERCONFIG
-            value: /workspace/source.lighthouse/jenkins-x/.npmrc
+            value: /workspace/source/.lighthouse/jenkins-x/.npmrc
           name: npm-publish
           resources: {}
           script: |
