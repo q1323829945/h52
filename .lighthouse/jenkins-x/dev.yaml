@@ -50,8 +50,7 @@ spec:
             else 
               repository=$NPM_REPOSITRY_RELEASES
             fi
-            apt-get update
-            apt-get install curl
+            apt-get update -y && apt-get install curl -y
             source .lighthouse/jenkins-x/publish.sh -r $NEXUS_UPLOAD_URL/repository/$repository -u $NPM_USERNAME -p $NPM_PASSWORD
   podTemplate: {}
   serviceAccountName: tekton-bot
