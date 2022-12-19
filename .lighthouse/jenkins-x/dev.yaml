@@ -52,11 +52,10 @@ spec:
             value: admin123
           resources: {}
           script: |
-            #!/bin/bash
+            #!/bin/sh
             cd /
-            cat /tekton/home/npm/.npmrc
-            cd /tekton/home/npm
             ls -lrtha
+            cd /tekton/home/npm
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 12h0m0s
