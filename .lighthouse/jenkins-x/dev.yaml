@@ -41,7 +41,7 @@ spec:
         - name: npm-publish
           env: 
           - name: NPM_URL
-            value: http://nexus.jx.svc.cluster.local:80/
+            value: http://nexus.jx.svc.cluster.local:80/repository/
           - name: NPM_REGISTRY_RELEASES
             value: npm-releases
           - name: NPM_REGISTRY_SNAPSHOTS
