@@ -34,7 +34,7 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            git describe --tags `git rev-list --tags --max-count=1` > VERSION
+            git describe --abbrev=0 --tags > VERSION
             cat VERSION
         - name: jx-variables
           resources:
