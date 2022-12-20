@@ -8,18 +8,13 @@ spec:
     optional: false
     source: "pullrequest.yaml"
   postsubmits:
-  - name: dev
-    context: "dev"
-    source: "dev.yaml"
+  - name: feature
+    context: "feature"
+    source: "feature.yaml"
     branches:
-    - ^.*-dev$
-  - name: snapshot
-    context: "snapshot"
-    source: "snapshot.yaml"
-    branches:
-    - ^.*-snapshot$
+    - ^.*-feature$
   - name: release
     context: "release"
     source: "release.yaml"
     branches:
-    - ^.*-release$
+    - ^main$

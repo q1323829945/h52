@@ -42,10 +42,13 @@ spec:
               cpu: 400m
               memory: 512Mi
         - name: replace-charts
+          env:
+          - name: CHARTS_REPOSITORY_URL
+            value: https://github.com/q1323829945/charts.git
           resources: {}
         - name: replace-resources
           env:
-          - name: CHARTS_REPOSITORY_URL
+          - name: RESOURCES_REPOSITORY_URL
             value: https://github.com/q1323829945/resources.git
         - name: build-npm-install
           resources: {}

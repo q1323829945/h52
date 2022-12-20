@@ -33,7 +33,7 @@ spec:
           resources: {}
           script: |
             #!/usr/bin/env sh
-            jx-release-version -tag=false -next-version=from-file:package.json -output-format={{.String}}  --debug > VERSION
+            jx-release-version -tag=false -next-version=from-file:build.gradle.kts -output-format={{.String}} --debug > VERSION
             cat VERSION
         - name: jx-variables
           resources:
@@ -48,9 +48,8 @@ spec:
           resources: {}
         - name: replace-resources
           env:
-          - name: CHARTS_REPOSITORY_URL
+          - name: RESOURCES_REPOSITORY_URL
             value: https://github.com/q1323829945/resources.git
-          resources: {}
         - name: build-npm-install
           resources: {}
         - name: build-ui-build
@@ -72,15 +71,6 @@ spec:
           resources: {}
         - name: promote-changelog
           resources: {}
-          script: |
-            #!/usr/bin/env sh
-            source .jx/variables.sh
-            if [ -d "charts/$REPO_NAME" ]; then
-            jx gitops yset -p version -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
-            jx gitops yset -p appVersion -v "$VERSION" -f ./charts/$REPO_NAME/Chart.yaml
-            jx gitops yset -p 'image.repository' -v $DOCKER_REGISTRY/$DOCKER_REGISTRY_ORG/$APP_NAME -f ./charts/$REPO_NAME/values.yaml
-            jx gitops yset -p 'image.tag' -v "$VERSION" -f ./charts/$REPO_NAME/values.yaml;
-            else echo no charts; fi
         - name: promote-helm-release
           resources: {}
         - name: promote-jx-promote
