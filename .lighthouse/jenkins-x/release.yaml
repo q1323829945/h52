@@ -29,11 +29,12 @@ spec:
         - image: uses:q1323829945/my-jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@versionStream
           name: ""
           resources: {}
-        - name: next-version
+        - image: docker.saas-ops.finline.app/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.27.0
+          name: next-version
           resources: {}
           script: |
             #!/usr/bin/env sh
-            git tag --sort=-taggerdate|head -n 1 > VERSION
+            git describe --tags `git rev-list --tags --max-count=1` > VERSION
             cat VERSION
         - name: jx-variables
           resources:
